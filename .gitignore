@@ -93,3 +93,7 @@ out/
 
 # data directory
 data/
+
+# Compiled output
+dist/
+out/

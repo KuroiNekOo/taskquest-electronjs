@@ -1,14 +1,16 @@
-# 📋 TaskMaster - Client Lourd Electron
+# ⚔️ TaskQuest - Client Lourd Gamifié
 
 ## Description
 
-TaskMaster est une application de gestion de tâches développée comme **client lourd** avec Electron Forge et stockage JSON local. L'application fonctionne entièrement en local sans nécessiter de connexion internet ou de serveur externe.
+TaskQuest est une application de gestion de tâches **gamifiée** développée comme **client lourd** avec Electron Forge et stockage JSON local. L'application fonctionne entièrement en local sans nécessiter de connexion internet ou de serveur externe.
+
+Transformez votre productivité en aventure ! Gagnez des points, débloquez des badges, montez de niveau et accomplissez des quêtes en gérant vos tâches quotidiennes.
 
 ## 🎯 Objectifs du projet
 
 - Démontrer le développement d'un **vrai client lourd** avec Electron
 - Utiliser un **stockage de données local** (JSON) pour la persistance
-- Créer une interface utilisateur moderne et réactive
+- Créer une interface utilisateur moderne et gamifiée
 - Assurer le fonctionnement **autonome** sans dépendances externes
 - Illustrer les concepts pédagogiques du client lourd vs client léger
 
@@ -16,256 +18,225 @@ TaskMaster est une application de gestion de tâches développée comme **client
 
 - **Electron Forge** - Framework et outils pour applications desktop
 - **Vite** - Build tool moderne et rapide
+- **Docker** - Environnement de build cross-platform
+- **Makefile** - Automatisation des tâches de build
 - **Stockage JSON** - Base de données locale simple et efficace
 - **HTML/CSS/JavaScript** - Interface utilisateur moderne
 - **Node.js** - Runtime JavaScript
 - **ES6 Modules** - Architecture modulaire moderne
 
-## 🚀 Fonctionnalités
+## 🎮 Fonctionnalités de gamification
 
-### Gestion des tâches
-- ✅ Créer, modifier et supprimer des tâches
-- ✅ Marquer les tâches comme terminées/en cours
-- ✅ Définir des priorités (haute, moyenne, basse)
-- ✅ Ajouter des descriptions détaillées
-- ✅ Persistance automatique des données
+### Système de points et niveaux
+- ⭐ **+10 points** pour créer une tâche
+- ⭐ **+20 points** pour terminer une tâche  
+- ⭐ **+5 points** pour modifier une tâche
+- 🚀 **Multiplicateurs** : ×2 pour haute priorité, ×1.5 pour tâches longues (120+ min)
+- 🏆 **Progression de niveau** : Débutant → Apprenti → Expert → Maître → Légende
 
-### Interface utilisateur
-- 🎨 Design moderne avec effets glassmorphisme
-- 📱 Interface responsive (desktop/mobile)
-- 🔍 Filtres avancés par priorité et statut
-- 📊 Tableau de bord avec statistiques en temps réel
-- 🔔 Notifications toast pour feedback utilisateur
-- ✨ Animations fluides et effets visuels
+### Badges et accomplissements
+- 🐦 **Early Bird** - Terminer une tâche avant 9h
+- 🦉 **Night Owl** - Terminer une tâche après 22h
+- 🔥 **Streak quotidien** - Jours consécutifs avec au moins 1 tâche terminée
 
-### Stockage de données
-- 💾 Stockage local avec fichiers JSON
-- 🔄 Sauvegarde automatique à chaque modification
-- 📈 Calcul de statistiques en temps réel
-- 🛡️ Gestion des erreurs et récupération automatique
-- 🔄 Persistence entre les redémarrages
+### Compétences évolutives
+- 🔧 **Efficacité** - Améliore avec chaque action
+- 🎯 **Concentration** - Se développe avec la complétion des tâches
+- 💡 **Créativité** - Grandit avec la diversité des tâches
 
-## 📦 Installation
+### Quêtes dynamiques
+- 🎯 **Quêtes actives** configurables
+- 🎁 **Récompenses en points** pour les objectifs atteints
+- ⏰ **Système de cooldown** pour renouveler les défis
+
+## 🚀 Installation et Build
 
 ### Prérequis
-- Node.js (version 16 ou supérieure)
-- npm (inclus avec Node.js)
+- **Node.js** (version 16 ou supérieure)
+- **Docker** (pour la compilation cross-platform)
+- **npm** (inclus avec Node.js)
 
-### Étapes d'installation
+### 🔧 Mode Développement (Test rapide)
 
-1. **Cloner ou télécharger le projet**
+Pour tester l'application rapidement en mode développement :
+
 ```bash
+# 1. Cloner le projet
 git clone <url-du-repo>
-cd taskmaster-app
-```
+cd taskquest-app
 
-2. **Installer les dépendances**
-```bash
+# 2. Installer les dépendances
 npm install
-```
 
-3. **Lancer l'application en mode développement**
-```bash
+# 3. Lancer en mode développement
 npm start
 ```
 
-4. **Construire l'application pour production**
+L'application s'ouvrira avec :
+- ✅ Hot reload automatique
+- ✅ DevTools intégrés
+- ✅ Données de test dans `./data/`
+
+### 📦 Build Production (Binaires exécutables)
+
+Pour générer les binaires exécutables cross-platform :
+
 ```bash
-npm run make
+# 1. Build automatique avec Docker
+npm run build-prod
 ```
 
-5. **Empaqueter sans installer**
+Cette commande unique va :
+- 🐳 **Construire l'environnement Docker** avec tous les outils nécessaires
+- 🔨 **Compiler l'application** pour Linux, Windows et macOS
+- 📁 **Générer les binaires** dans le dossier `out/`
+
+### 📂 Résultat du build
+
+Après compilation, vous trouverez dans `out/` :
+
+```
+out/
+├── my-app-linux-x64/
+│   └── my-app              # Exécutable Linux
+├── my-app-win32-x64/
+│   └── my-app.exe          # Exécutable Windows
+└── my-app-darwin-x64/      # Application macOS (si build réussi)
+    └── my-app.app
+```
+
+### 🧹 Nettoyage
+
 ```bash
-npm run package
+# Nettoyer les fichiers de build
+npm run clean
 ```
 
 ## 📁 Structure du projet
 
 ```
-taskmaster-app/
+taskquest-app/
 ├── src/
-│   ├── main.js          # Process principal Electron
-│   ├── preload.js       # Script de préchargement sécurisé
-│   ├── database.js      # Gestionnaire de stockage JSON
-│   ├── index.css        # Styles CSS modernes
-│   └── renderer.js      # Logique de l'interface
-├── data/                # Données de développement (auto-créé)
-│   └── taskmaster-data.json
-├── package.json         # Configuration Electron Forge
-├── .vite/              # Build Vite (auto-généré)
-├── index.html       # Interface utilisateur
-└── README.md           # Documentation
+│   ├── main.js              # Process principal Electron
+│   ├── preload.js           # Script de préchargement sécurisé
+│   ├── database.js          # Gestionnaire gamifié JSON
+│   ├── index.html           # Interface utilisateur 4 pages
+│   ├── index.css            # Styles gamifiés modernes
+│   └── renderer.js          # Logique complète de l'interface
+├── data/                    # Données de développement (auto-créé)
+│   └── taskquest-data.json  # Base de données locale
+├── out/                     # Binaires générés (après build)
+├── Dockerfile               # Environnement de build cross-platform
+├── Makefile                 # Automatisation des tâches
+├── package.json             # Configuration Electron Forge
+└── README.md               # Documentation
 ```
 
-## 🔧 Architecture
+## 🔧 Architecture gamifiée
 
 ### Process Principal (main.js)
 - Gestion de la fenêtre Electron avec Vite
-- Configuration des communications IPC sécurisées
+- APIs IPC pour la gamification (points, badges, quêtes)
 - Initialisation du système de stockage
 - Gestion du cycle de vie de l'application
 
-### Stockage de données (database.js)
-- Système de fichiers JSON pour persistance locale
-- Opérations CRUD complètes sur les tâches
-- Calcul automatique des statistiques
-- Gestion intelligente des chemins (dev/production)
-- Sauvegarde automatique et récupération d'erreurs
+### Système de gamification (database.js)
+- **Calcul automatique des points** avec multiplicateurs
+- **Gestion des niveaux** et progression
+- **Système de badges** basé sur les actions
+- **Quêtes dynamiques** configurables
+- **Streak quotidien** automatique
+- **Compétences évolutives**
 
-### Interface utilisateur (renderer.js + index.html)
-- Gestion des événements utilisateur modernes
-- Communication sécurisée avec le process principal
-- Mise à jour dynamique de l'interface
-- Système de filtrage et tri des données
-- Gestion des modales et notifications
+### Interface multi-pages (renderer.js + index.html)
+- **🏠 Dashboard** - Vue d'ensemble héros + quêtes actives
+- **👤 Profil** - Badges, compétences, statistiques détaillées  
+- **📖 Guide** - Explication complète du système de gamification
+- **⚙️ Admin** - Configuration avancée des paramètres
 
-### Sécurité (preload.js)
-- Context isolation activé
-- APIs exposées de manière sécurisée
-- Validation et échappement des données
+## 🎨 Design gamifié
 
-## 🎨 Caractéristiques du design
+- **Thème RPG/Fantasy** - Avatars, icônes d'aventure
+- **Effets visuels** - Particules lors des réussites
+- **Barres de progression** - XP, compétences, quêtes
+- **Couleurs dynamiques** - Selon priorité et statut
+- **Animations fluides** - Feedback visuel constant
+- **Interface intuitive** - Navigation par onglets
 
-- **Glassmorphisme** - Effets de transparence et flou d'arrière-plan
-- **Dégradés modernes** - Arrière-plans colorés et dynamiques
-- **Animations fluides** - Transitions CSS et effets de hover
-- **Design responsive** - Adaptation automatique mobile/desktop
-- **Notifications toast** - Feedback visuel pour les actions utilisateur
-- **Interface intuitive** - UX moderne et accessible
-
-## 💾 Système de stockage
+## 💾 Système de données gamifié
 
 ### Structure des données
 ```json
 {
-  "tasks": [
-    {
-      "id": 1,
-      "title": "Exemple de tâche",
-      "description": "Description détaillée",
-      "completed": false,
-      "priority": "medium",
-      "created_at": "2025-01-15T10:30:00.000Z",
-      "updated_at": "2025-01-15T10:30:00.000Z"
+  "tasks": [...],
+  "profile": {
+    "totalPoints": 350,
+    "level": 3,
+    "streak": 5,
+    "badges": ["early_bird", "night_owl"],
+    "skills": {
+      "efficiency": { "level": 2, "points": 45 },
+      "concentration": { "level": 1, "points": 30 }
     }
-  ],
-  "projects": [],
-  "nextId": 2
+  },
+  "quests": [...],
+  "config": {
+    "pointsPerCreate": 10,
+    "pointsPerComplete": 20,
+    "highPriorityMultiplier": 2
+  }
 }
 ```
 
-### Localisation des données
-- **Développement** : `./data/taskmaster-data.json` (dans le projet)
-- **Production** : `%APPDATA%/taskmaster-app/taskmaster-data.json` (Windows)
+## 🐳 Workflow Docker
 
-### Données d'exemple
-L'application génère automatiquement 5 tâches d'exemple lors de la première utilisation pour démonstration.
+Le système utilise Docker pour garantir un environnement de build reproductible :
 
-## 🔐 Sécurité et bonnes pratiques
+1. **Image Docker** avec Linux + outils cross-compilation
+2. **Volume mounting** pour accéder au code source
+3. **Makefile** exécuté dans l'environnement Unix
+4. **Cross-compilation** automatique pour toutes les plateformes
+5. **Binaires copiés** vers le dossier local `out/`
 
-- **Context Isolation** - Séparation complète des contextes
-- **Preload Script** - API contrôlée pour les communications
-- **Validation des entrées** - Échappement HTML et sanitisation
-- **Gestion des erreurs** - Traitement robuste des exceptions
-- **Communications IPC** - Protocole sécurisé entre processus
+## ⚙️ Configuration admin
 
-## 🧪 Développement et debugging
-
-### Mode développement
-```bash
-npm start
-```
-- Ouverture automatique des DevTools
-- Hot reload avec Vite
-- Logs détaillés en console
-- Données stockées dans `./data/`
-
-### Scripts disponibles
-```bash
-npm start          # Lancement en développement
-npm run package    # Empaquetage sans installation
-npm run make       # Build complet avec installeurs
-npm run publish    # Publication (si configuré)
-```
-
-### Debugging
-- DevTools intégrés pour inspection
-- Logs détaillés dans la console
-- Fichier de données JSON lisible et éditable
-- Messages d'erreur explicites
-
-## 📱 Compatibilité
-
-- **Windows** - Windows 10/11 (testé)
-- **macOS** - macOS 10.15+ (compatible)
-- **Linux** - Ubuntu 18.04+ (compatible)
-
-## 🚀 Distribution
-
-### Build pour production
-```bash
-npm run make
-```
-
-Génère les installeurs dans le dossier `out/` :
-- Windows : `.exe` et `.msi`
-- macOS : `.dmg`
-- Linux : `.deb`, `.rpm`, `.zip`
-
-### Empaquetage rapide
-```bash
-npm run package
-```
-Génère une version portable dans `out/` sans installeur.
+L'interface admin permet de :
+- 📊 **Ajuster les points** et multiplicateurs
+- 🎯 **Créer des quêtes** personnalisées
+- 🏅 **Gérer les badges** manuellement
+- 🔄 **Reset du profil** complet
+- 📤 **Export des données** de sauvegarde
 
 ## 🎓 Aspects pédagogiques
 
-Ce projet démontre parfaitement :
+Ce projet démontre :
 
 ### 1. **Client lourd vs Client léger**
 - **Autonomie totale** - Fonctionne sans serveur ni internet
-- **Stockage local** - Données privées sur la machine utilisateur
 - **Performance native** - Interface rapide sans latence réseau
-- **Installation locale** - Application installée sur le système
+- **Données privées** - Stockage local sécurisé
+- **Installation locale** - Application desktop native
 
-### 2. **Architecture Electron moderne**
-- **Separation des processus** - Main/Renderer avec IPC
-- **Sécurité renforcée** - Context isolation et preload
-- **Build moderne** - Vite + Electron Forge
+### 2. **Architecture moderne**
+- **Docker** - Environnement de build standardisé
+- **Makefile** - Automatisation des tâches
+- **Cross-compilation** - Binaires multi-plateformes
 - **Modules ES6** - Code structuré et maintenable
 
-### 3. **Persistance des données locale**
-- **Fichiers JSON** - Simple et efficace pour démonstration
-- **Auto-sauvegarde** - Persistance transparente
-- **Gestion d'erreurs** - Récupération automatique
-- **Portabilité** - Données dans dossiers standards OS
-
-### 4. **Interface utilisateur moderne**
-- **CSS avancé** - Animations et effets visuels
-- **JavaScript moderne** - ES6+, modules, async/await
-- **Responsive design** - Adaptation multi-écrans
-- **UX optimisée** - Feedback utilisateur constant
+### 3. **Gamification appliquée**
+- **Système de récompenses** - Points, niveaux, badges
+- **Progression mesurable** - Compétences et statistiques
+- **Engagement utilisateur** - Quêtes et défis
+- **Feedback constant** - Notifications et effets visuels
 
 ## 🔍 Points clés démontrés
 
-- ✅ **Autonomie complète** - Zéro dépendance serveur
-- ✅ **Performance native** - Rapidité d'une app desktop
-- ✅ **Données privées** - Stockage local sécurisé
-- ✅ **Interface moderne** - UX professionnelle
-- ✅ **Architecture robuste** - Code maintenable et extensible
-- ✅ **Sécurité** - Bonnes pratiques Electron
-- ✅ **Cross-platform** - Fonctionnement multi-OS
-
-## 🚧 Extensions possibles
-
-Pour enrichir le projet pédagogique :
-- Import/Export de données (CSV, JSON)
-- Système de catégories et tags
-- Notifications desktop système
-- Raccourcis clavier globaux
-- Mode sombre/clair
-- Synchronisation optionnelle cloud
-- Système de backup automatique
+- ✅ **Client lourd autonome** - Zéro dépendance serveur
+- ✅ **Cross-compilation** - Binaires Windows/Linux/macOS
+- ✅ **Gamification complète** - Système de progression RPG
+- ✅ **Interface moderne** - 4 pages avec navigation fluide
+- ✅ **Architecture Docker** - Build reproductible
+- ✅ **Données persistantes** - Sauvegarde locale automatique
 
 ## 📝 Licence
 
@@ -275,10 +246,10 @@ MIT License - Libre d'utilisation pour projets éducatifs et commerciaux.
 
 ## 💡 Note pédagogique
 
-Ce projet illustre parfaitement les avantages du **client lourd** :
-- **Performance** : Pas de latence réseau
-- **Fiabilité** : Fonctionne hors ligne
-- **Sécurité** : Données locales privées
-- **Expérience** : Interface native et fluide
+TaskQuest illustre parfaitement les avantages du **client lourd gamifié** :
+- **Performance** : Interface native fluide avec effets visuels
+- **Engagement** : Système de points et progression motivant
+- **Autonomie** : Fonctionne hors ligne avec données privées
+- **Expérience** : Application desktop complète et immersive
 
-Idéal pour démontrer les concepts fondamentaux des architectures logicielles et la différence entre applications web et desktop natives.
+Idéal pour démontrer l'intersection entre développement d'applications desktop et design de systèmes gamifiés.
