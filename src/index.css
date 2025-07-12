@@ -63,7 +63,7 @@ body {
 .nav-btn {
     padding: 10px 20px;
     border: none;
-    border-radius: 25px;
+    border-radius: 10px;
     background: transparent;
     color: var(--dark-color);
     font-weight: 600;
@@ -97,7 +97,7 @@ body {
 
 .level-badge, .points-badge {
     padding: 6px 12px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: 600;
     font-size: 0.8rem;
 }
@@ -156,7 +156,7 @@ body {
     font-size: 4rem;
     padding: 20px;
     background: var(--gradient-primary);
-    border-radius: 50%;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -661,7 +661,7 @@ body {
     font-size: 5rem;
     padding: 30px;
     background: var(--gradient-primary);
-    border-radius: 50%;
+    border-radius: 10px;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
@@ -819,7 +819,7 @@ body {
     background: var(--gradient-primary);
     color: white;
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 0.8rem;
     font-weight: 600;
 }
@@ -917,7 +917,7 @@ body {
     background: var(--gradient-success);
     color: white;
     padding: 6px 15px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: 700;
     font-size: 0.9rem;
 }
