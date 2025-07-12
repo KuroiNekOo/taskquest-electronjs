@@ -293,7 +293,7 @@ body {
     background: var(--gradient-warning);
     color: white;
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 0.8rem;
     font-weight: 600;
 }
