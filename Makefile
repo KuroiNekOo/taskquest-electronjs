@@ -1,16 +1,21 @@
 # Makefile pour TaskQuest
 
-.PHONY: install build build-all clean all
+.PHONY: install build-vite build build-all clean all
 
 # Installation des dépendances
 install:
 	@echo "📦 Installation des dépendances..."
 	npm install
 
+# Build Vite (génère .vite/build/main.js)
+build-vite:
+	@echo "🔧 Build Vite en cours..."
+	NODE_ENV=production npx vite build
+
 # Build de l'application pour Linux seulement
 build:
 	@echo "🔨 Compilation de TaskQuest (Linux)..."
-	npm run package
+	NODE_ENV=production npm run package
 
 # Build pour toutes les plateformes
 build-all:
@@ -27,12 +32,12 @@ clean:
 	@echo "🧹 Nettoyage..."
 	rm -rf node_modules out .vite
 
-# Build complet pour toutes les plateformes (sans copie vers dist)
-all: install build-all
+# Build complet pour toutes les plateformes
+all: install build-vite build-all
 	@echo "🎉 Build cross-platform terminé."
 	@echo "📁 Binaires disponibles dans le dossier out/ :"
 	@ls -la out/ 2>/dev/null || echo "Dossier out/ vide"
 
 # Build simple (Linux seulement)
-linux: install build
+linux: install build-vite build
 	@echo "🎉 Build Linux terminé dans out/"
