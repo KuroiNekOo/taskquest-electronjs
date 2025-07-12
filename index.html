@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskQuest - Devenez un Héros de la Productivité</title>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <h1>⚔️ TaskQuest</h1>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+            <button class="nav-btn" data-page="profile">👤 Profil</button>
+            <button class="nav-btn" data-page="guide">📖 Guide</button>
+            <button class="nav-btn" data-page="admin">⚙️ Admin</button>
+        </div>
+        <div class="nav-status">
+            <div class="level-indicator">
+                <span class="level-badge">Niv. <span id="nav-level">1</span></span>
+                <span class="points-badge"><span id="nav-points">0</span> ⭐</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- PAGE DASHBOARD -->
+        <div id="dashboard-page" class="page active">
+            <!-- Header du héros -->
+            <header class="hero-header">
+                <div class="hero-info">
+                    <div class="hero-avatar">🧙‍♂️</div>
+                    <div class="hero-details">
+                        <h2 id="hero-name">Héros Débutant</h2>
+                        <div class="hero-level">
+                            <span>Niveau <span id="hero-level">1</span></span>
+                            <div class="xp-bar">
+                                <div class="xp-progress" id="xp-progress"></div>
+                            </div>
+                            <span class="xp-text" id="xp-text">0 / 100 XP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="streak-value">0</span>
+                        <span class="stat-label">Streak</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="total-points">0</span>
+                        <span class="stat-label">Points</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Quêtes actives -->
+            <section class="quests-section">
+                <h3>🎯 Quêtes Actives</h3>
+                <div id="active-quests" class="quests-container">
+                    <!-- Les quêtes seront injectées ici -->
+                </div>
+            </section>
+
+            <!-- Dashboard des tâches -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h3>📋 Vos Tâches</h3>
+                    <button id="add-task-btn" class="btn btn-primary">
+                        ➕ Nouvelle Tâche
+                    </button>
+                </div>
+
+                <!-- Stats rapides -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <h4 id="total-tasks">0</h4>
+                            <p>Total</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h4 id="completed-tasks">0</h4>
+                            <p>Terminées</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-content">
+                            <h4 id="pending-tasks">0</h4>
+                            <p>En cours</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-content">
+                            <h4 id="high-priority-tasks">0</h4>
+                            <p>Priorité haute</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres -->
+                <div class="task-filters">
+                    <select id="priority-filter">
+                        <option value="all">Toutes les priorités</option>
+                        <option value="high">Haute priorité</option>
+                        <option value="medium">Moyenne priorité</option>
+                        <option value="low">Basse priorité</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="all">Tous les statuts</option>
+                        <option value="pending">En cours</option>
+                        <option value="completed">Terminées</option>
+                    </select>
+                </div>
+
+                <!-- Liste des tâches -->
+                <div id="tasks-container" class="tasks-container">
+                    <!-- Les tâches seront injectées ici -->
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE PROFIL -->
+        <div id="profile-page" class="page">
+            <div class="profile-container">
+                <header class="profile-header">
+                    <div class="profile-avatar">🧙‍♂️</div>
+                    <div class="profile-info">
+                        <h2>Profil du Héros</h2>
+                        <div class="profile-level">
+                            <span class="level-title">Niveau <span id="profile-level">1</span></span>
+                            <div class="level-progress">
+                                <div class="level-bar">
+                                    <div class="level-fill" id="profile-level-fill"></div>
+                                </div>
+                                <span class="level-text" id="profile-level-text">0 / 100 XP</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="profile-sections">
+                    <!-- Badges -->
+                    <section class="badges-section">
+                        <h3>🏅 Badges</h3>
+                        <div id="badges-container" class="badges-grid">
+                            <!-- Les badges seront injectés ici -->
+                        </div>
+                    </section>
+
+                    <!-- Compétences -->
+                    <section class="skills-section">
+                        <h3>🔧 Compétences</h3>
+                        <div id="skills-container" class="skills-grid">
+                            <!-- Les compétences seront injectées ici -->
+                        </div>
+                    </section>
+
+                    <!-- Statistiques détaillées -->
+                    <section class="detailed-stats">
+                        <h3>📈 Statistiques Détaillées</h3>
+                        <div id="detailed-stats-container" class="stats-detailed-grid">
+                            <!-- Les stats seront injectées ici -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE GUIDE -->
+        <div id="guide-page" class="page">
+            <div class="guide-container">
+                <header class="guide-header">
+                    <h2>📖 Guide du Héros</h2>
+                    <p>Apprenez comment devenir un maître de la productivité !</p>
+                </header>
+
+                <div class="guide-sections">
+                    <section class="guide-section">
+                        <h3>⭐ Système de Points</h3>
+                        <div class="guide-content">
+                            <div class="point-rule">
+                                <span class="rule-action">Créer une tâche</span>
+                                <span class="rule-points">+10 points</span>
+                            </div>
+                            <div class="point-rule">
+                                <span class="rule-action">Terminer une tâche</span>
+                                <span class="rule-points">+20 points</span>
+                            </div>
+                            <div class="point-rule">
+                                <span class="rule-action">Modifier une tâche</span>
+                                <span class="rule-points">+5 points</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="guide-section">
+                        <h3>🚀 Multiplicateurs</h3>
+                        <div class="guide-content">
+                            <div class="multiplier-rule">
+                                <span class="rule-condition">Tâche haute priorité</span>
+                                <span class="rule-multiplier">×2 points</span>
+                            </div>
+                            <div class="multiplier-rule">
+                                <span class="rule-condition">Tâche longue (120+ min)</span>
+                                <span class="rule-multiplier">×1.5 points</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="guide-section">
+                        <h3>🏆 Niveaux</h3>
+                        <div class="guide-content">
+                            <div class="level-table">
+                                <div class="level-row">
+                                    <span class="level-name">Débutant</span>
+                                    <span class="level-requirement">0 - 99 points</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-name">Apprenti</span>
+                                    <span class="level-requirement">100 - 299 points</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-name">Compétent</span>
+                                    <span class="level-requirement">300 - 599 points</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-name">Expert</span>
+                                    <span class="level-requirement">600 - 999 points</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-name">Maître</span>
+                                    <span class="level-requirement">1000+ points</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="guide-section">
+                        <h3>🏅 Badges</h3>
+                        <div class="guide-content">
+                            <div class="badge-explanation">
+                                <div class="badge-item">
+                                    <span class="badge-icon">🐦</span>
+                                    <div class="badge-info">
+                                        <strong>Early Bird</strong>
+                                        <p>Terminer une tâche avant 9h du matin</p>
+                                    </div>
+                                </div>
+                                <div class="badge-item">
+                                    <span class="badge-icon">🦉</span>
+                                    <div class="badge-info">
+                                        <strong>Night Owl</strong>
+                                        <p>Terminer une tâche après 22h</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="guide-section">
+                        <h3>🔧 Compétences</h3>
+                        <div class="guide-content">
+                            <div class="skill-explanation">
+                                <div class="skill-item">
+                                    <strong>Efficacité</strong>
+                                    <p>Améliore avec chaque action dans l'application</p>
+                                </div>
+                                <div class="skill-item">
+                                    <strong>Concentration</strong>
+                                    <p>Se développe avec la complétion des tâches</p>
+                                </div>
+                                <div class="skill-item">
+                                    <strong>Créativité</strong>
+                                    <p>Grandit avec la diversité des tâches</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="guide-section">
+                        <h3>🎯 Quêtes</h3>
+                        <div class="guide-content">
+                            <div class="quest-explanation">
+                                <p>Les quêtes sont des défis spéciaux qui apparaissent régulièrement pour vous encourager à atteindre des objectifs spécifiques. Terminez-les pour gagner des bonus de points !</p>
+                                <div class="quest-types">
+                                    <div class="quest-type-item">
+                                        <strong>Quêtes de création</strong>
+                                        <p>Créer un certain nombre de nouvelles tâches</p>
+                                    </div>
+                                    <div class="quest-type-item">
+                                        <strong>Quêtes de complétion</strong>
+                                        <p>Terminer un nombre spécifique de tâches</p>
+                                    </div>
+                                    <div class="quest-type-item">
+                                        <strong>Quêtes temporelles</strong>
+                                        <p>Accomplir des tâches à des moments particuliers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE ADMIN -->
+        <div id="admin-page" class="page">
+            <div class="admin-container">
+                <header class="admin-header">
+                    <h2>⚙️ Panel d'Administration</h2>
+                    <p>Configurez les paramètres de gamification</p>
+                </header>
+
+                <div class="admin-sections">
+                    <!-- Configuration des points -->
+                    <section class="admin-section">
+                        <h3>⭐ Configuration des Points</h3>
+                        <div class="config-grid">
+                            <div class="config-item">
+                                <label>Points par création :</label>
+                                <input type="number" id="points-create" min="1" max="100">
+                            </div>
+                            <div class="config-item">
+                                <label>Points par complétion :</label>
+                                <input type="number" id="points-complete" min="1" max="100">
+                            </div>
+                            <div class="config-item">
+                                <label>Points par modification :</label>
+                                <input type="number" id="points-modify" min="1" max="50">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Configuration des multiplicateurs -->
+                    <section class="admin-section">
+                        <h3>🚀 Multiplicateurs</h3>
+                        <div class="config-grid">
+                            <div class="config-item">
+                                <label>Multiplicateur haute priorité :</label>
+                                <input type="number" id="multiplier-high" min="1" max="5" step="0.1">
+                            </div>
+                            <div class="config-item">
+                                <label>Multiplicateur tâche longue :</label>
+                                <input type="number" id="multiplier-long" min="1" max="3" step="0.1">
+                            </div>
+                            <div class="config-item">
+                                <label>Seuil tâche longue (minutes) :</label>
+                                <input type="number" id="long-task-threshold" min="30" max="480">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Gestion des quêtes -->
+                    <section class="admin-section">
+                        <h3>🎯 Gestion des Quêtes</h3>
+                        <div class="quest-management">
+                            <div class="config-item">
+                                <label>Cooldown des quêtes (heures) :</label>
+                                <input type="number" id="quest-cooldown" min="1" max="168">
+                            </div>
+                            <div class="quest-actions">
+                                <button id="add-quest-btn" class="btn btn-primary">Ajouter une Quête</button>
+                                <button id="reset-quests-btn" class="btn btn-secondary">Reset Quêtes</button>
+                            </div>
+                            <div id="quests-list" class="quests-admin-list">
+                                <!-- Liste des quêtes admin -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Actions admin -->
+                    <section class="admin-section">
+                        <h3>🛠️ Actions Administrateur</h3>
+                        <div class="admin-actions">
+                            <div class="action-group">
+                                <label>Ajouter des points :</label>
+                                <input type="number" id="admin-points" placeholder="Points à ajouter">
+                                <button id="add-points-btn" class="btn btn-success">Ajouter</button>
+                            </div>
+                            <div class="action-group">
+                                <label>Ajouter un badge :</label>
+                                <select id="admin-badge">
+                                    <option value="">Sélectionner un badge</option>
+                                    <option value="early_bird">Early Bird 🐦</option>
+                                    <option value="night_owl">Night Owl 🦉</option>
+                                </select>
+                                <button id="add-badge-btn" class="btn btn-success">Ajouter Badge</button>
+                            </div>
+                            <div class="action-group">
+                                <button id="reset-profile-btn" class="btn btn-danger">Reset Profil Complet</button>
+                                <button id="export-data-btn" class="btn btn-info">Exporter Données</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Informations système -->
+                    <section class="admin-section">
+                        <h3>📊 Informations Système</h3>
+                        <div class="system-info">
+                            <div class="info-item">
+                                <label>Chemin de la base de données :</label>
+                                <span id="db-path">Chargement...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Dernière sauvegarde :</label>
+                                <span id="last-save">-</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sauvegarde -->
+                    <section class="admin-section">
+                        <div class="save-actions">
+                            <button id="save-config-btn" class="btn btn-primary">💾 Sauvegarder Configuration</button>
+                            <button id="reset-config-btn" class="btn btn-warning">🔄 Reset par Défaut</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter/modifier une tâche -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Nouvelle Tâche</h3>
+                <button id="close-modal" class="close-btn">✕</button>
+            </div>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title">Titre de la tâche *</label>
+                    <input type="text" id="task-title" required placeholder="Ex: Terminer le rapport mensuel">
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" rows="3" placeholder="Détaillez votre tâche..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priorité</label>
+                    <select id="task-priority">
+                        <option value="low">Basse</option>
+                        <option value="medium" selected>Moyenne</option>
+                        <option value="high">Haute (×2 points!)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="task-time">Temps estimé (minutes)</label>
+                    <input type="number" id="task-time" min="5" max="480" value="60" placeholder="60">
+                    <small class="form-hint">Tâches de 120+ minutes donnent ×1.5 points</small>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-btn" class="btn btn-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-primary">⚔️ Accepter la Tâche</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter une quête admin -->
+    <div id="quest-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Créer une Quête</h3>
+                <button id="close-quest-modal" class="close-btn">✕</button>
+            </div>
+            <form id="quest-form">
+                <div class="form-group">
+                    <label for="quest-title">Titre de la quête</label>
+                    <input type="text" id="quest-title" required placeholder="Ex: Maître de la productivité">
+                </div>
+                <div class="form-group">
+                    <label for="quest-description">Description</label>
+                    <textarea id="quest-description" rows="2" placeholder="Décrivez l'objectif de cette quête..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quest-type">Type de quête</label>
+                    <select id="quest-type">
+                        <option value="create_tasks">Créer des tâches</option>
+                        <option value="completion">Terminer des tâches</option>
+                        <option value="morning_tasks">Tâches matinales</option>
+                        <option value="daily_completion">Complétion quotidienne</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quest-target">Objectif (nombre)</label>
+                    <input type="number" id="quest-target" min="1" max="100" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="quest-reward">Récompense (points)</label>
+                    <input type="number" id="quest-reward" min="10" max="1000" value="50">
+                </div>
+                <div class="form-group">
+                    <label for="quest-cooldown">Cooldown (heures)</label>
+                    <input type="number" id="quest-cooldown-hours" min="1" max="168" value="24">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-quest-btn" class="btn btn-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Créer la Quête</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Effet de particules pour les réussites -->
+    <div id="particle-container" class="particle-container"></div>
+
+    <script type="module" src="/src/renderer.js"></script>
+</body>
+</html>
