@@ -1050,6 +1050,14 @@ body {
     color: var(--dark-color);
 }
 
+#admin-badge {
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: .9rem;
+    min-width: 150px;
+}
+
 .config-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
